@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toolora-lnp.pages.dev/sitemap.xml
