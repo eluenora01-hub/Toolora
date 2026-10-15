@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 import JPGToPDF from "./pages/JPGToPDF";
 import TextToPDF from "./pages/TextToPDF";
@@ -12,123 +12,71 @@ import CVBuilder from "./pages/CVBuilder";
 
 import "./App.css";
 
-function App() {
-  const [currentTool, setCurrentTool] = useState("home");
+/* =========================
+   NAVBAR
+========================= */
 
-  /* =========================
-     TOOL PAGE
-  ========================= */
+function Navbar({ toolPage = false }) {
+  const navigate = useNavigate();
 
-  const toolPages = {
-    "text-pdf": {
-      title: "Text to PDF",
-      component: <TextToPDF />,
-    },
+  return (
+    <header className="navbar">
 
-    "jpg-pdf": {
-      title: "JPG to PDF",
-      component: <JPGToPDF />,
-    },
-
-    "image-compress": {
-      title: "Image Compressor",
-      component: <ImageCompressor />,
-    },
-
-    "pdf-merger": {
-      title: "PDF Merger",
-      component: <PDFMerger />,
-    },
-
-    "pdf-splitter": {
-      title: "PDF Splitter",
-      component: <PDFSplitter />,
-    },
-
-    "pdf-image": {
-      title: "PDF to JPG / PNG",
-      component: <PDFToImage />,
-    },
-
-    "image-cropper": {
-      title: "Image Cropper",
-      component: <ImageCropper />,
-    },
-
-    "qr-generator": {
-      title: "QR Code Generator",
-      component: <QRCodeGenerator />,
-    },
-
-    "cv-builder": {
-      title: "CV / Resume Builder",
-      component: <CVBuilder />,
-    },
-  };
-
-  /* =========================
-     TOOL PAGE RENDER
-  ========================= */
-
-  if (currentTool !== "home") {
-    const selectedTool = toolPages[currentTool];
-
-    return (
-      <div className="app">
-
-        <header className="navbar">
-
-          <div
-            className="logo"
-            onClick={() => setCurrentTool("home")}
-            style={{ cursor: "pointer" }}
-          >
-            Toolora
-          </div>
-
-          <button
-            className="back-button"
-            onClick={() => setCurrentTool("home")}
-          >
-            ← Back to Tools
-          </button>
-
-        </header>
-
-        <main>
-          {selectedTool.component}
-        </main>
-
+      <div
+        className="logo"
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer" }}
+      >
+        Toolora
       </div>
-    );
-  }
 
-  /* =========================
-     HOMEPAGE
-  ========================= */
+      {toolPage ? (
+        <button
+          className="back-button"
+          onClick={() => navigate("/")}
+        >
+          ← Back to Tools
+        </button>
+      ) : (
+        <div className="nav-links">
+          <a href="#tools">Tools</a>
+          <a href="#about">About</a>
+        </div>
+      )}
 
+    </header>
+  );
+}
+
+/* =========================
+   TOOL PAGE LAYOUT
+========================= */
+
+function ToolPage({ children }) {
+  return (
+    <div className="app">
+
+      <Navbar toolPage={true} />
+
+      <main>
+        {children}
+      </main>
+
+    </div>
+  );
+}
+
+/* =========================
+   HOMEPAGE
+========================= */
+
+function Home() {
   return (
     <div className="app">
 
       {/* NAVBAR */}
 
-      <header className="navbar">
-
-        <div
-          className="logo"
-          onClick={() => setCurrentTool("home")}
-          style={{ cursor: "pointer" }}
-        >
-          Toolora
-        </div>
-
-        <div className="nav-links">
-          <a href="#tools">Tools</a>
-          <a href="#about">About</a>
-        </div>
-
-      </header>
-
+      <Navbar />
 
       {/* HERO */}
 
@@ -175,11 +123,11 @@ function App() {
               Convert your text into a professional PDF file.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("text-pdf")}
-            >
-              Open Tool
-            </button>
+            <Link to="/text-to-pdf">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -200,11 +148,11 @@ function App() {
               Convert images into PDF documents quickly.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("jpg-pdf")}
-            >
-              Open Tool
-            </button>
+            <Link to="/jpg-to-pdf">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -225,11 +173,11 @@ function App() {
               Reduce image file size while keeping good quality.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("image-compress")}
-            >
-              Open Tool
-            </button>
+            <Link to="/image-compressor">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -250,11 +198,11 @@ function App() {
               Merge multiple PDF files into one document.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("pdf-merger")}
-            >
-              Open Tool
-            </button>
+            <Link to="/pdf-merger">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -275,11 +223,11 @@ function App() {
               Split a PDF into separate pages quickly.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("pdf-splitter")}
-            >
-              Open Tool
-            </button>
+            <Link to="/pdf-splitter">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -300,11 +248,11 @@ function App() {
               Convert PDF pages into JPG or PNG images.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("pdf-image")}
-            >
-              Open Tool
-            </button>
+            <Link to="/pdf-to-image">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -325,11 +273,11 @@ function App() {
               Crop, zoom and rotate images easily.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("image-cropper")}
-            >
-              Open Tool
-            </button>
+            <Link to="/image-cropper">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -350,11 +298,11 @@ function App() {
               Generate a QR code from any link or URL.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("qr-generator")}
-            >
-              Open Tool
-            </button>
+            <Link to="/qr-code-generator">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -375,11 +323,11 @@ function App() {
               Create a professional CV and resume in minutes.
             </p>
 
-            <button
-              onClick={() => setCurrentTool("cv-builder")}
-            >
-              Open Tool
-            </button>
+            <Link to="/cv-builder">
+              <button>
+                Open Tool
+              </button>
+            </Link>
 
           </div>
 
@@ -405,6 +353,114 @@ function App() {
       </section>
 
     </div>
+  );
+}
+
+
+/* =========================
+   APP ROUTES
+========================= */
+
+function App() {
+  return (
+    <BrowserRouter>
+
+      <Routes>
+
+        {/* HOME */}
+
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+
+        {/* TOOLS */}
+
+        <Route
+          path="/text-to-pdf"
+          element={
+            <ToolPage>
+              <TextToPDF />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/jpg-to-pdf"
+          element={
+            <ToolPage>
+              <JPGToPDF />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/image-compressor"
+          element={
+            <ToolPage>
+              <ImageCompressor />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/pdf-merger"
+          element={
+            <ToolPage>
+              <PDFMerger />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/pdf-splitter"
+          element={
+            <ToolPage>
+              <PDFSplitter />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/pdf-to-image"
+          element={
+            <ToolPage>
+              <PDFToImage />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/image-cropper"
+          element={
+            <ToolPage>
+              <ImageCropper />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/qr-code-generator"
+          element={
+            <ToolPage>
+              <QRCodeGenerator />
+            </ToolPage>
+          }
+        />
+
+        <Route
+          path="/cv-builder"
+          element={
+            <ToolPage>
+              <CVBuilder />
+            </ToolPage>
+          }
+        />
+
+      </Routes>
+
+    </BrowserRouter>
   );
 }
 
