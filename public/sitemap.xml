@@ -5,4 +5,40 @@
     <loc>https://toolora-lnp.pages.dev/</loc>
   </url>
 
+  <url>
+    <loc>https://toolora-lnp.pages.dev/text-to-pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/jpg-to-pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/image-compressor</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/pdf-merger</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/pdf-splitter</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/pdf-to-image</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/image-cropper</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/qr-code-generator</loc>
+  </url>
+
+  <url>
+    <loc>https://toolora-lnp.pages.dev/cv-builder</loc>
+  </url>
+
 </urlset>
